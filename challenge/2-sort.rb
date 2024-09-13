@@ -1,31 +1,27 @@
-###
-#
-#  Sort integer arguments (ascending) 
-#
-###
-
+# Initialize an empty array to store sorted integers
 result = []
-ARGV.each do |arg|
-    # skip if not integer
-    next if arg !~ /^-?[0-9]+$/
 
-    # convert to integer
-    i_arg = arg.to_i
-    
-    # insert result at the right position
-    is_inserted = false
-    i = 0
-    l = result.size
-    while !is_inserted && i < l do
-        if result[i] < i_arg
-            i += 1
-        else
-            result.insert(i - 1, i_arg)
-            is_inserted = true
-            break
-        end
+# Iterate over each argument provided to the script
+ARGV.each do |arg|
+  # Skip if the argument is not an integer
+  next unless arg =~ /^-?\d+$/
+
+  # Convert the argument to an integer
+  i_arg = arg.to_i
+
+  # Insert the integer into the result array while maintaining order
+  inserted = false
+  result.each_with_index do |num, index|
+    if i_arg < num
+      result.insert(index, i_arg)
+      inserted = true
+      break
     end
-    result << i_arg if !is_inserted
+  end
+
+  # If the integer is larger than all elements in the array, append it at the end
+  result.push(i_arg) unless inserted
 end
 
+# Print the sorted result array, joining elements with a space
 puts result.join(" ")
