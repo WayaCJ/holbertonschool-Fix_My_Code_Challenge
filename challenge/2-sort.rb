@@ -23,5 +23,5 @@ ARGV.each do |arg|
   result.push(i_arg) unless inserted
 end
 
-# Print the sorted result array, joining elements with a space
-puts result.join(" ")
+# Print each element
+result.each { |num| puts num }
